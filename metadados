@@ -1,0 +1,12 @@
+                    
+#!/bin/bash
+#script de analise de metadados
+echo ---------------------------------------------
+echo Support pdf, doc, docx, xls, xlsx, ppt, pptx
+echo ---------------------------------------------
+echo Modo de Uso: ./script.sh Target.com docx arquivo
+echo ---------------------------------------------
+lynx --dump "$1" | grep "$2" | cut -d "=" -f2 | egrep -v "site|google" | se>
+for url in $(cat "$3"); do wget -q $url; done
+exiftool *."$2"
+rm -rf *."$2"
