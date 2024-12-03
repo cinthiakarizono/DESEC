@@ -1,0 +1,20 @@
+  GNU nano 7.2                     webrecon.sh                              
+#!/bin/bash
+#Brute force de diretorios 
+for palavra in $(cat wordlist.txt)
+do
+res=$(curl -s -o /dev/null -H"Mozilla/5.0" -w"%{http_code}" $1/$palavra/)
+
+if [ $res == "200" ]
+then echo "Diretorio encontrado:$1/$palavra/"
+fi
+done
+
+for palavra in $(cat wordlist.txt)
+do 
+res=$(curl -s -o /dev/null -H"Mozilla/5.0" -w"%http_code" $1/$palavra)
+if [ $res == "200" ]
+then echo "Arquivo encontrado:$1/$palavra"
+else echo "Arquivo nao encontrado"
+fi
+done
